@@ -1,0 +1,2 @@
+let army = [];
+let players = [];
