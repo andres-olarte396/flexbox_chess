@@ -31,15 +31,13 @@ function drag(ev) {
   let equipment = equipments[turn];
   if (ev.target.id.includes(equipment)) {
     ev.dataTransfer.setData("id", ev.target.id);
-  } else {
-    alert(`This is turn of equipment ${equipment}.`);
   }
 }
 function drop(ev) {
   ev.preventDefault();
-  let member = document.getElementById(ev.dataTransfer.getData("id"));
   let equipment = equipments[turn];
-  if (member.equipment.includes(equipment)) return;
+  let member = document.getElementById(ev.dataTransfer.getData("id"));
+  if (!member?.id.includes(equipment)) return;
 
   let target = ev.target.localName === "icon" ? ev.target.parentNode : ev.target;
   if (target.children.length > 0) {
