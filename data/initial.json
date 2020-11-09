@@ -1,4 +1,10 @@
 {
+  "turn": 0,
+  "equipments": [
+    "white",
+    "black"
+  ],
+  "equipment": "white",
   "columns": [
     "a",
     "b",
@@ -10,23 +16,16 @@
     "h"
   ],
   "states": [
-    {
-      "name": "initial"
-    },
-    {
-      "name": "moving"
-    },
-    {
-      "name": "captured"
-    },
-    {
-      "name": "revived"
-    }
+    "initial",
+    "moving",
+    "captured",
+    "revived"
   ],
   "army_members": [
     {
-      "name": "king",
-      "color": "white",
+      "name": "King",
+      "id": "kw",
+      "equipment": "white",
       "symbol": "♔",
       "max_steps": [
         1
@@ -39,8 +38,9 @@
       "material_points": 34
     },
     {
-      "name": "queen",
-      "color": "white",
+      "name": "Queen",
+      "id": "qw",
+      "equipment": "white",
       "symbol": "♕",
       "max_steps": [
         8
@@ -53,8 +53,9 @@
       "material_points": 9
     },
     {
-      "name": "tower",
-      "color": "white",
+      "name": "Tower",
+      "id": "tw",
+      "equipment": "white",
       "symbol": "♖",
       "max_steps": [
         8
@@ -67,8 +68,9 @@
       "material_points": 5
     },
     {
-      "name": "bishop",
-      "color": "white",
+      "name": "Bishop",
+      "id": "bw",
+      "equipment": "white",
       "symbol": "♗",
       "max_steps": [
         8
@@ -81,8 +83,9 @@
       "material_points": 3
     },
     {
-      "name": "horse",
-      "color": "white",
+      "name": "Horse",
+      "id": "hw",
+      "equipment": "white",
       "symbol": "♘",
       "max_steps": [
         2,
@@ -96,8 +99,9 @@
       "material_points": 3
     },
     {
-      "name": "pawn",
-      "color": "white",
+      "name": "Pawn",
+      "id": "pw",
+      "equipment": "white",
       "symbol": "♙",
       "max_steps": [
         1
@@ -110,8 +114,9 @@
       "material_points": 1
     },
     {
-      "name": "king",
-      "color": "black",
+      "name": "King",
+      "id": "kb",
+      "equipment": "black",
       "symbol": "♚",
       "max_steps": [
         1
@@ -124,8 +129,9 @@
       "material_points": 34
     },
     {
-      "name": "queen",
-      "color": "black",
+      "name": "Queen",
+      "id": "qb",
+      "equipment": "black",
       "symbol": "♛",
       "max_steps": [
         8
@@ -138,8 +144,9 @@
       "material_points": 9
     },
     {
-      "name": "tower",
-      "color": "black",
+      "name": "Tower",
+      "id": "tb",
+      "equipment": "black",
       "symbol": "♜",
       "max_steps": [
         8
@@ -152,8 +159,9 @@
       "material_points": 5
     },
     {
-      "name": "bishop",
-      "color": "black",
+      "name": "Bishop",
+      "id": "bb",
+      "equipment": "black",
       "symbol": "♝",
       "max_steps": [
         8
@@ -166,8 +174,9 @@
       "material_points": 3
     },
     {
-      "name": "horse",
-      "color": "black",
+      "name": "Horse",
+      "id": "hb",
+      "equipment": "black",
       "symbol": "♞",
       "max_steps": [
         2,
@@ -181,8 +190,9 @@
       "material_points": 3
     },
     {
-      "name": "pawn",
-      "color": "black",
+      "name": "Pawn",
+      "id": "pb",
+      "equipment": "black",
       "symbol": "♟",
       "max_steps": [
         1

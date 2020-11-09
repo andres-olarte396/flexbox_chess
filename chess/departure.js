@@ -1,2 +1,0 @@
-let army = [];
-let players = [];
