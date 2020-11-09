@@ -1,0 +1,72 @@
+#chess {
+  margin: 20px;
+  border: 3px solid black;
+  padding: 20px solid lightgray;
+}
+.flex-container {
+  width: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: white;
+}
+.flex-container > div {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+.flex-container > div > div{
+  width: 100px;
+  height: 100px;
+}
+.flex-container > div > div.black {
+  background-color: darkgrey;
+}
+.flex-container > div > div.white {
+  background-color: grey;
+}
+
+icon{
+  align-content: center;
+  font-size: 80px;
+}
+icon.white{
+  color: white;
+}
+icon.black{
+  color: black;
+}
+icon.king.white{
+  content: '&#9812';
+}
+icon.queen.white{
+  content: '&#9813';
+}
+icon.tower.white{
+  content: '&#9814';
+}
+icon.horse.white{
+  content: '&#9816';
+}
+icon.bishop.white{
+  content: '&#9815';
+}
+icon.pawn.white{
+  content: '&#9817';
+}
+icon.king.black{
+  content: '&#9818';
+}
+icon.queen.black{
+  content: '&#9819';
+}
+icon.tower.black{
+  content: '&#9820';
+}
+icon.horse.black{
+  content: '&#9822';
+}
+icon.bishop.black{
+  content: '&#9821';
+}
+icon.pawn.black{
+  content: '&#9823';
+}
