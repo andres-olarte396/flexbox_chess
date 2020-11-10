@@ -54,7 +54,7 @@
     },
     {
       "name": "Tower",
-      "id": "tw",
+      "id": "tw1",
       "equipment": "white",
       "symbol": "♖",
       "max_steps": [
@@ -62,14 +62,29 @@
       ],
       "movements": "n,s,e,w",
       "attacks": "n,s,e,w",
-      "initial_columns": "a,h",
+      "initial_columns": "a",
+      "initial_row": 1,
+      "initial_quantity": 2,
+      "material_points": 5
+    },
+    {
+      "name": "Tower",
+      "id": "tw2",
+      "equipment": "white",
+      "symbol": "♖",
+      "max_steps": [
+        8
+      ],
+      "movements": "n,s,e,w",
+      "attacks": "n,s,e,w",
+      "initial_columns": "h",
       "initial_row": 1,
       "initial_quantity": 2,
       "material_points": 5
     },
     {
       "name": "Bishop",
-      "id": "bw",
+      "id": "bw1",
       "equipment": "white",
       "symbol": "♗",
       "max_steps": [
@@ -77,14 +92,29 @@
       ],
       "movements": "ne,nw,se,sw",
       "attacks": "ne,nw,se,sw",
-      "initial_columns": "c,f",
+      "initial_columns": "c",
+      "initial_row": 1,
+      "initial_quantity": 2,
+      "material_points": 3
+    },
+    {
+      "name": "Bishop",
+      "id": "bw2",
+      "equipment": "white",
+      "symbol": "♗",
+      "max_steps": [
+        8
+      ],
+      "movements": "ne,nw,se,sw",
+      "attacks": "ne,nw,se,sw",
+      "initial_columns": "f",
       "initial_row": 1,
       "initial_quantity": 2,
       "material_points": 3
     },
     {
       "name": "Horse",
-      "id": "hw",
+      "id": "hw1",
       "equipment": "white",
       "symbol": "♘",
       "max_steps": [
@@ -93,14 +123,30 @@
       ],
       "movements": "ne,nw,se,sw",
       "attacks": "ne,nw,se,sw",
-      "initial_columns": "b,g",
+      "initial_columns": "b",
+      "initial_row": 1,
+      "initial_quantity": 2,
+      "material_points": 3
+    },
+    {
+      "name": "Horse",
+      "id": "hw2",
+      "equipment": "white",
+      "symbol": "♘",
+      "max_steps": [
+        2,
+        3
+      ],
+      "movements": "ne,nw,se,sw",
+      "attacks": "ne,nw,se,sw",
+      "initial_columns": "g",
       "initial_row": 1,
       "initial_quantity": 2,
       "material_points": 3
     },
     {
       "name": "Pawn",
-      "id": "pw",
+      "id": "pw1",
       "equipment": "white",
       "symbol": "♙",
       "max_steps": [
@@ -108,7 +154,112 @@
       ],
       "movements": "n",
       "attacks": "ne,nw",
-      "initial_columns": "a,b,c,d,e,f,g,h",
+      "initial_columns": "a",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw2",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "b",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw3",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "c",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw4",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "d",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw5",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "e",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw6",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "f",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw7",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "g",
+      "initial_row": 2,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pw8",
+      "equipment": "white",
+      "symbol": "♙",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "h",
       "initial_row": 2,
       "initial_quantity": 8,
       "material_points": 1
@@ -145,7 +296,7 @@
     },
     {
       "name": "Tower",
-      "id": "tb",
+      "id": "tb1",
       "equipment": "black",
       "symbol": "♜",
       "max_steps": [
@@ -153,14 +304,29 @@
       ],
       "movements": "n,s,e,w",
       "attacks": "n,s,e,w",
-      "initial_columns": "a,h",
+      "initial_columns": "a",
+      "initial_row": 8,
+      "initial_quantity": 2,
+      "material_points": 5
+    },
+    {
+      "name": "Tower",
+      "id": "tb2",
+      "equipment": "black",
+      "symbol": "♜",
+      "max_steps": [
+        8
+      ],
+      "movements": "n,s,e,w",
+      "attacks": "n,s,e,w",
+      "initial_columns": "h",
       "initial_row": 8,
       "initial_quantity": 2,
       "material_points": 5
     },
     {
       "name": "Bishop",
-      "id": "bb",
+      "id": "bb1",
       "equipment": "black",
       "symbol": "♝",
       "max_steps": [
@@ -168,14 +334,29 @@
       ],
       "movements": "ne,nw,se,sw",
       "attacks": "ne,nw,se,sw",
-      "initial_columns": "c,f",
+      "initial_columns": "c",
+      "initial_row": 8,
+      "initial_quantity": 2,
+      "material_points": 3
+    },
+    {
+      "name": "Bishop",
+      "id": "bb2",
+      "equipment": "black",
+      "symbol": "♝",
+      "max_steps": [
+        8
+      ],
+      "movements": "ne,nw,se,sw",
+      "attacks": "ne,nw,se,sw",
+      "initial_columns": "f",
       "initial_row": 8,
       "initial_quantity": 2,
       "material_points": 3
     },
     {
       "name": "Horse",
-      "id": "hb",
+      "id": "hb1",
       "equipment": "black",
       "symbol": "♞",
       "max_steps": [
@@ -184,14 +365,30 @@
       ],
       "movements": "ne,nw,se,sw",
       "attacks": "ne,nw,se,sw",
-      "initial_columns": "b,g",
+      "initial_columns": "b",
+      "initial_row": 8,
+      "initial_quantity": 2,
+      "material_points": 3
+    },
+    {
+      "name": "Horse",
+      "id": "hb2",
+      "equipment": "black",
+      "symbol": "♞",
+      "max_steps": [
+        2,
+        3
+      ],
+      "movements": "ne,nw,se,sw",
+      "attacks": "ne,nw,se,sw",
+      "initial_columns": "g",
       "initial_row": 8,
       "initial_quantity": 2,
       "material_points": 3
     },
     {
       "name": "Pawn",
-      "id": "pb",
+      "id": "pb1",
       "equipment": "black",
       "symbol": "♟",
       "max_steps": [
@@ -199,7 +396,112 @@
       ],
       "movements": "n",
       "attacks": "ne,nw",
-      "initial_columns": "a,b,c,d,e,f,g,h",
+      "initial_columns": "a",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb2",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "b",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb3",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "c",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb4",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "d",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb5",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "e",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb6",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "f",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb7",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "g",
+      "initial_row": 7,
+      "initial_quantity": 8,
+      "material_points": 1
+    },
+    {
+      "name": "Pawn",
+      "id": "pb8",
+      "equipment": "black",
+      "symbol": "♟",
+      "max_steps": [
+        1
+      ],
+      "movements": "n",
+      "attacks": "ne,nw",
+      "initial_columns": "h",
       "initial_row": 7,
       "initial_quantity": 8,
       "material_points": 1

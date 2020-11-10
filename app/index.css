@@ -15,8 +15,8 @@
 }
 
 .cell{
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   font-size: 9px;
   margin: 1px;
 }
@@ -35,7 +35,7 @@
 
 icon{
   align-content: center;
-  font-size: 80px;
+  font-size: 40px;
 }
 icon:before{
   content: attr(symbol);

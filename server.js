@@ -1,7 +1,6 @@
-let http = require('http');
-let fs = require('fs');
-let host = '127.0.0.1';
-let port = 5000;
+const http = require('http');
+const fs = require('fs');
+
 let server = http.createServer(function (req, res) {
   if (req.url === '/') {
     req.url = "app/index.html";
@@ -18,11 +17,15 @@ let server = http.createServer(function (req, res) {
         res.end(contents);
       }
     } catch (e) {
-      res.writeHead(500, { 'Content-Type': 'text/html' });
+      res.writeHead(500, );
       res.end(req.url);
     }
   });
 });
+
+// exec command: HOST=127.0.0.1 PORT=4001 node server.js
+const host = process.env.HOST || '127.0.0.1';
+const port = process.env.PORT || 5000;
 server.listen(port, host, function () {
   console.log(`This server is runing on http://${host}:${port}`);
 });
