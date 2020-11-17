@@ -11,20 +11,20 @@ fetch("/data/initial.json")
   .then((response) => {
     if (response) {
       data = response;
-      for (let i = 0; i < data.board.columns; i++) {
-        let r = `<div id="${data.columns[i]}" class="column">`;
+      for (let i = 0; i < data.board.cols; i++) {
+        let r = `<div id="${data.cols[i]}" class="col">`;
         for (let j = 0; j < data.board.rows; j++) {
-          r = `${r}<div id="${j + 1}${data.columns[i]}" column="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
+          r = `${r}<div id="${j + 1}${data.cols[i]}" col="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
         }
         r = `${r}</div>`;
         chess.html(`${chess.html()}${r}`);
       }
       data.army_members.forEach(member => {
         for (let i = 0; i < member.initial_quantity; i++) {
-          let cell = $(`#${member.initial_row}${member.initial_columns.split(',')[i]}`);
-          let col = cell.attr("column");
+          let cell = $(`#${member.initial_row}${member.initial_col.split(',')[i]}`);
+          let col = cell.attr("col");
           if (cell)
-            cell.html(`<icon id="${member.id}" title="${member.name} ${i + 1}" equipment="${member.equipment}" name="${member.name}" symbol="${member.symbol}" class="${member.equipment}" row="${member.initial_row}" column="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
+            cell.html(`<icon id="${member.id}" title="${member.name} ${i + 1}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
         }
       });
     }
@@ -33,64 +33,113 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 function drag(ev) {
-  if (ev.target.getAttribute("equipment").includes(data.equipment)) {
+  if (ev.target.getAttribute("side").includes(data.side)) {
     ev.dataTransfer.setData("id", ev.target.id);
   }
 }
 function drop(ev) {
   ev.preventDefault();
   let member = document.getElementById(ev.dataTransfer.getData("id"));
-  if (!member?.getAttribute("equipment").includes(data.equipment)) return;
+  if (!member?.getAttribute("side").includes(data.side)) return;
 
   let target = ev.target.localName === "icon" ? ev.target.parentNode : ev.target;
-  if (!validateNewPosition(member, target)) return;
-
+  let movement = {
+    id: member.id,
+    type: member.getAttribute("name"),
+    side: data.side,
+    turn: data.turn,
+    date: (new Date()).toLocaleDateString('en-US'),
+    pos: {
+      initial: {
+        id: member.parentNode.id,
+        col: parseInt(member.getAttribute("col")),
+        row: parseInt(member.getAttribute("row"))
+      },
+      final: {
+        id: target.id,
+        col: parseInt(target.getAttribute("col")),
+        row: parseInt(target.getAttribute("row"))
+      },
+      diffs: {
+        cols: parseInt(member.getAttribute("col")) - parseInt(target.getAttribute("col")),
+        rows: parseInt(member.getAttribute("row")) - parseInt(target.getAttribute("row")),
+      }
+    }
+  };
+  let child;
   if (target.children.length > 0) {
-    let child = target.children[0];
-    if (child.id.includes(data.equipment)) return;
-    target.removeChild(child);
-    if (data.equipment === "white")
-      white_points.html(child.getAttribute("points"))
-    else
-      black_points.html(child.getAttribute("points"))
+    child = target.children[0];
+    movement.captured = {
+      side: child.getAttribute("side"),
+      points: child.getAttribute("points"),
+      catch: false
+    };
+    validateCaptured(movement.captured)
   }
-
-  history.push({ item: member.id, origin: member.parentNode.id, destination: target.id, equipment: data.equipment, date: (new Date()).toLocaleDateString('en-US') });
-  member.setAttribute("column", target.getAttribute("column"));
+  if (!validateMovement(movement)) return;
+  if (movement.captured?.catch) target.removeChild(child);
+  history.push(movement);
+  member.setAttribute("col", target.getAttribute("col"));
   member.setAttribute("row", target.getAttribute("row"));
   target.appendChild(member);
   changeTurn();
+  turnLabel.html(data.side);
+  quantityLabel.html(data.turn);
 }
-function validateNewPosition(member, target) {
-  let coldif = parseInt(member.getAttribute("column")) - parseInt(target.getAttribute("column"));
-  let rowdif = parseInt(member.getAttribute("row")) - parseInt(target.getAttribute("row"));
-  switch (member.getAttribute("name")) {
-    case "King":
-      if (Math.abs(coldif) > 1
-        || Math.abs(rowdif) > 1)
+function validateCaptured(member) {
+  if (member.side === data.side)
+    return false;
+  member.catch = true;
+  if (data.side === "white")
+    white_points.html(member.points);
+  else
+    black_points.html(member.points);
+  return member.catch;
+}
+function validateTrayectory(movement) {
+  let initial = movement.pos.initial;
+  let final = movement.pos.final;
+  for (let col = initial.col;
+    (initial.col > final.col ? col >= final.col : col <= final.col);
+    (initial.col > final.col ? col-- : col++)) {
+    for (let row = initial.row;
+      (initial.row > final.row ? row > final.row : row < final.row);
+      (initial.row > final.row ? row-- : row++)) {
+      debugger
+      let cell = $(`#${row}${data.cols[col]}`);
+      if (cell.children.length > 0)
+        return false;
+    }
+  }
+  return true;
+}
+function validateMovement(movement) {
+  switch (movement.type) {
+    case "king":
+      if (Math.abs(movement.pos.diffs.cols) > 1
+        || Math.abs(movement.pos.diffs.rows) > 1)
         return false;
       break;
-    case "Queen":
-      if (Math.abs(coldif) !== 0
-        && Math.abs(rowdif) !== 0
-        && Math.abs(coldif) !== Math.abs(rowdif))
+    case "queen":
+      if (Math.abs(movement.pos.diffs.cols) !== 0 && Math.abs(movement.pos.diffs.rows) !== 0
+        && Math.abs(movement.pos.diffs.cols) !== Math.abs(movement.pos.diffs.rows))
         return false;
-      break;
-    case "Tower":
-      if (Math.abs(coldif) !== 0
-        && Math.abs(rowdif) !== 0)
+      return validateTrayectory(movement);
+    case "tower":
+      if (Math.abs(movement.pos.diffs.cols) !== 0 && Math.abs(movement.pos.diffs.rows) !== 0)
         return false;
-      break;
-    case "Bishop":
-      if (Math.abs(coldif) !== Math.abs(rowdif))
+      return validateTrayectory(movement);
+    case "bishop":
+      if (Math.abs(movement.pos.diffs.cols) !== Math.abs(movement.pos.diffs.rows))
         return false;
-      break;
-    case "Horse":
-      return (Math.abs(coldif) === 1 && Math.abs(rowdif) === 2)
-        || (Math.abs(coldif) === 2 && Math.abs(rowdif) === 1);
-    case "Pawn":
-      rowdif = (data.equipment === "white" ? -1 : 1) * rowdif;
-      if (coldif !== 0 || rowdif != 1)
+      return validateTrayectory(movement);
+    case "horse":
+      return (Math.abs(movement.pos.diffs.cols) === 1 && Math.abs(movement.pos.diffs.rows) === 2)
+        || (Math.abs(movement.pos.diffs.cols) === 2 && Math.abs(movement.pos.diffs.rows) === 1);
+    case "pawn":
+      let factor = (movement.side === "white" ? -1 : 1);
+      if ((factor * movement.pos.diffs.cols) !== (movement.captured?.catch ? 1 : 0)
+        || (factor * movement.pos.diffs.rows) > (movement.turn < 2 ? 2 : 1))
         return false;
       break;
     default:
@@ -100,7 +149,5 @@ function validateNewPosition(member, target) {
 }
 function changeTurn() {
   data.turn = data.turn + 1;
-  data.equipment = data.equipments[data.turn % data.equipments.length];
-  turnLabel.html(data.equipment);
-  quantityLabel.html(data.turn);
+  data.side = data.sides[data.turn % data.sides.length];
 }
