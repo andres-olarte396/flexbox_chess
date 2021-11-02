@@ -26,6 +26,7 @@ let server = http.createServer(function (req, res) {
 // exec command: HOST=127.0.0.1 PORT=4001 node server.js
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 5000;
+
 server.listen(port, host, function () {
   console.log(`This server is runing on http://${host}:${port}`);
 });

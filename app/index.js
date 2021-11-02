@@ -1,34 +1,39 @@
 let chess = $("#chess");
 let turnLabel = $("#turn");
 let quantityLabel = $("#quantity");
-let black_points = $("#black_points");
-let white_points = $("#white_points");
+let black_points = 0;
+let white_points = 0;
+
 let data = {};
 let history = [];
-fetch("/data/initial.json")
-  .then((res) => res.json())
-  .catch((error) => console.error("Error:", error))
-  .then((response) => {
-    if (response) {
-      data = response;
-      for (let i = 0; i < data.board.cols; i++) {
-        let r = `<div id="${data.cols[i]}" class="col">`;
-        for (let j = 0; j < data.board.rows; j++) {
-          r = `${r}<div id="${j + 1}${data.cols[i]}" col="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
+load();
+function load() {
+  messageShow("Start");
+  fetch("/data/initial.json")
+    .then((res) => res.json())
+    .catch((error) => console.error("Error:", error))
+    .then((response) => {
+      if (response) {
+        data = response;
+        for (let i = 0; i < data.board.cols; i++) {
+          let r = `<div id="${data.cols[i]}" class="col">`;
+          for (let j = 0; j < data.board.rows; j++) {
+            r = `${r}<div id="${j + 1}${data.cols[i]}" col="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
+          }
+          r = `${r}</div>`;
+          chess.html(`${chess.html()}${r}`);
         }
-        r = `${r}</div>`;
-        chess.html(`${chess.html()}${r}`);
+        data.army_members.forEach(member => {
+          for (let i = 0; i < member.initial_quantity; i++) {
+            let cell = $(`#${member.initial_row}${member.initial_col.split(',')[i]}`);
+            let col = cell.attr("col");
+            if (cell)
+              cell.html(`<icon id="${member.id}" title="${member.name} ${i + 1}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
+          }
+        });
       }
-      data.army_members.forEach(member => {
-        for (let i = 0; i < member.initial_quantity; i++) {
-          let cell = $(`#${member.initial_row}${member.initial_col.split(',')[i]}`);
-          let col = cell.attr("col");
-          if (cell)
-            cell.html(`<icon id="${member.id}" title="${member.name} ${i + 1}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
-        }
-      });
-    }
-  });
+    });
+}
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -91,22 +96,28 @@ function validateCaptured(member) {
     return false;
   member.catch = true;
   if (data.side === "white")
-    white_points.html(member.points);
+  {
+    white_points = white_points + parseInt(member.points);
+    $("#white_points").html(white_points);
+  }
   else
-    black_points.html(member.points);
+  {
+    black_points = black_points + parseInt(member.points);
+    $("#black_points").html(black_points);
+  }
   return member.catch;
 }
 function validateTrayectory(movement) {
   let initial = movement.pos.initial;
   let final = movement.pos.final;
+  debugger
   for (let col = initial.col;
     (initial.col > final.col ? col >= final.col : col <= final.col);
     (initial.col > final.col ? col-- : col++)) {
     for (let row = initial.row;
       (initial.row > final.row ? row > final.row : row < final.row);
       (initial.row > final.row ? row-- : row++)) {
-      debugger
-      let cell = $(`#${row}${data.cols[col]}`);
+      let cell = $(`#${row}${data.cols[col-1]}`);
       if (cell.children.length > 0)
         return false;
     }
@@ -150,4 +161,10 @@ function validateMovement(movement) {
 function changeTurn() {
   data.turn = data.turn + 1;
   data.side = data.sides[data.turn % data.sides.length];
+}
+function messageShow(msg) {
+  document.getElementById("message").innerHTML = msg;
+  let overlay = document.getElementById("overlay");
+  overlay.style.display = "block";
+  setTimeout(() => { overlay.style.display = 'none'; }, 3000);
 }

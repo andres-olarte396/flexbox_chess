@@ -1,3 +1,13 @@
+.container {
+  display: flex;
+}
+
+.container>div {
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem;
+}
+
 #chess {
   margin: 20px;
   border: 3px solid black;
@@ -85,4 +95,68 @@ icon.pawn :before {
 h1, h2, h3, h4, h5, span.h1, span.h2, span.h3, span {
   height: 20px;
   font-family: Impact, Haettenschweiler, Franklin Gothic Bold, Charcoal, Helvetica Inserat, Bitstream Vera Sans Bold, Arial Black, sans serif !important;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid darkgray;
+  text-align: center;
+  padding: 8px;
+}
+
+th {
+  color: darkgray;
+  background-color: lightgray;
+  height: 14px;
+  font-family: Impact, Haettenschweiler, Franklin Gothic Bold, Charcoal, Helvetica Inserat, Bitstream Vera Sans Bold, Arial Black, sans serif !important;
+}
+
+tbody {
+  text-align: center;
+  border: 1px solid darkgray;
+  counter-reset: section;
+}
+
+tbody>tr:before {
+  counter-increment: section;
+  content: counter(section);
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+caption {
+  height: 16px;
+  font-family: Impact, Haettenschweiler, Franklin Gothic Bold, Charcoal, Helvetica Inserat, Bitstream Vera Sans Bold, Arial Black, sans serif !important;
+  padding: 8px;
+  margin: 8px;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }

@@ -1,12 +1,52 @@
 <html>
-  <head>
-    <title>Chess</title>
-    <link rel="stylesheet" href="app/index.css"></link>
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-  </head>
-  <body>
-    <span><h1>Chess</h1><h3>Turn: <span id="turn">white</span> - Quantity: <span id="quantity">0</span> - White points: <span id="white_points">0</span> - Black points: <span id="black_points">0</span></h3></span>
-    <div id="chess" class="flex-container"></div>
-    <script src="app/index.js"></script>
-  </body>
+
+<head>
+  <title>Chess</title>
+  <link rel="stylesheet" href="app/index.css"></link>
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+
+<body>
+  <div>
+    <span>
+      <h1>Chess</h1>
+      <h3>Turn: <span id="turn">white</span> - Quantity: <span id="quantity">0</span> - White points: <span
+          id="white_points">0</span> - Black points: <span id="black_points">0</span></h3>
+    </span>
+  </div>
+  <div class="container">
+    <div>
+      <div id="chess" class="flex-container"></div>
+      <div id="overlay" onclick="this.style.display = 'none'">
+        <div id="message">Start</div>
+      </div>
+    </div>
+    <div>
+      <table id="movements">
+        <caption>Movements</caption>
+        <colgroup>
+          <col class="counter" span="1">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>White</th>
+            <th>Black</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>White</th>
+            <th>Black</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <script src="app/index.js"></script>
+</body>
+
 </html>
