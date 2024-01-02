@@ -48,12 +48,17 @@ function drop(ev) {
   if (!member?.getAttribute("side").includes(data.side)) return;
 
   let target = ev.target.localName === "icon" ? ev.target.parentNode : ev.target;
+  let now = new Date();
+  let date = now.toLocaleDateString('es-CO');
+  let time = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', seconds: '3-digit' });
+
   let movement = {
     id: member.id,
     type: member.getAttribute("name"),
     side: data.side,
     turn: data.turn,
-    date: (new Date()).toLocaleDateString('en-US'),
+    date: date,
+    time: time,
     pos: {
       initial: {
         id: member.parentNode.id,
@@ -88,6 +93,7 @@ function drop(ev) {
   member.setAttribute("row", target.getAttribute("row"));
   target.appendChild(member);
   changeTurn();
+
   turnLabel.html(data.side);
   quantityLabel.html(data.turn);
 }
@@ -118,8 +124,10 @@ function validateTrayectory(movement) {
       (initial.row > final.row ? row > final.row : row < final.row);
       (initial.row > final.row ? row-- : row++)) {
       let cell = $(`#${row}${data.cols[col-1]}`);
+      console.log(cell);
       if (cell.children.length > 0)
         return false;
+
     }
   }
   return true;
@@ -148,7 +156,15 @@ function validateMovement(movement) {
       return (Math.abs(movement.pos.diffs.cols) === 1 && Math.abs(movement.pos.diffs.rows) === 2)
         || (Math.abs(movement.pos.diffs.cols) === 2 && Math.abs(movement.pos.diffs.rows) === 1);
     case "pawn":
-      let factor = (movement.side === "white" ? -1 : 1);
+      let factor;
+      switch (movement.side) {
+        case "white":
+            factor = 1;
+            break;
+        case "black":
+            factor = -1;
+            break;
+    } 
       if ((factor * movement.pos.diffs.cols) !== (movement.captured?.catch ? 1 : 0)
         || (factor * movement.pos.diffs.rows) > (movement.turn < 2 ? 2 : 1))
         return false;
