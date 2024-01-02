@@ -1,4 +1,4 @@
-# flexbox_chess
+# Flexbox chess
 
 Usando Javascript y CSS pinta un tablero de ajedrez y posiciona sus piezas que se pueden mover y aplica algunas reglas
 
