@@ -28,7 +28,7 @@ function load() {
             let cell = $(`#${member.initial_row}${member.initial_col.split(',')[i]}`);
             let col = cell.attr("col");
             if (cell)
-              cell.html(`<icon id="${member.id}" title="${member.name} ${i + 1}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
+              cell.html(`<icon id="${member.id}" title="${member.name} ${member.id}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
           }
         });
       }
@@ -101,13 +101,11 @@ function validateCaptured(member) {
   if (member.side === data.side)
     return false;
   member.catch = true;
-  if (data.side === "white")
-  {
+  if (data.side === "white") {
     white_points = white_points + parseInt(member.points);
     $("#white_points").html(white_points);
   }
-  else
-  {
+  else {
     black_points = black_points + parseInt(member.points);
     $("#black_points").html(black_points);
   }
@@ -116,20 +114,37 @@ function validateCaptured(member) {
 function validateTrayectory(movement) {
   let initial = movement.pos.initial;
   let final = movement.pos.final;
-  debugger
-  for (let col = initial.col;
-    (initial.col > final.col ? col >= final.col : col <= final.col);
-    (initial.col > final.col ? col-- : col++)) {
-    for (let row = initial.row;
-      (initial.row > final.row ? row > final.row : row < final.row);
-      (initial.row > final.row ? row-- : row++)) {
-      let cell = $(`#${row}${data.cols[col-1]}`);
-      console.log(cell);
-      if (cell.children.length > 0)
-        return false;
 
+  if (initial.col === final.col) {
+    for (let row = Math.min(initial.row, final.row) + 1; row < Math.max(initial.row, final.row); row++) {
+      let cell = $(`#${row}${data.cols[initial.col - 1]}`);
+      if (cell.children().length > 0) {
+        return false;
+      }
+    }
+  } else if (initial.row === final.row) {
+    for (let col = Math.min(initial.col, final.col) + 1; col < Math.max(initial.col, final.col); col++) {
+      let cell = $(`#${initial.row}${data.cols[col - 1]}`);
+      if (cell.children().length > 0) {
+        return false;
+      }
     }
   }
+
+  if (Math.abs(initial.col - final.col) === Math.abs(initial.row - final.row)) {
+    let colDirection = (final.col - initial.col) / Math.abs(final.col - initial.col);
+    let rowDirection = (final.row - initial.row) / Math.abs(final.row - initial.row);
+
+    for (let i = 1; i < Math.abs(initial.col - final.col); i++) {
+      let col = initial.col + i * colDirection;
+      let row = initial.row + i * rowDirection;
+      let cell = $(`#${row}${data.cols[col - 1]}`);
+      if (cell.children().length > 0) {
+        return false;
+      }
+    }
+  }
+
   return true;
 }
 function validateMovement(movement) {
@@ -156,15 +171,15 @@ function validateMovement(movement) {
       return (Math.abs(movement.pos.diffs.cols) === 1 && Math.abs(movement.pos.diffs.rows) === 2)
         || (Math.abs(movement.pos.diffs.cols) === 2 && Math.abs(movement.pos.diffs.rows) === 1);
     case "pawn":
-      let factor;
+      let factor = 0;
       switch (movement.side) {
         case "white":
-            factor = 1;
-            break;
+          factor = 1;
+          break;
         case "black":
-            factor = -1;
-            break;
-    } 
+          factor = -1;
+          break;
+      }
       if ((factor * movement.pos.diffs.cols) !== (movement.captured?.catch ? 1 : 0)
         || (factor * movement.pos.diffs.rows) > (movement.turn < 2 ? 2 : 1))
         return false;
@@ -172,15 +187,27 @@ function validateMovement(movement) {
     default:
       return false;
   }
+  addToMovementsTable(movement);
   return true;
 }
 function changeTurn() {
   data.turn = data.turn + 1;
   data.side = data.sides[data.turn % data.sides.length];
+
 }
 function messageShow(msg) {
   document.getElementById("message").innerHTML = msg;
   let overlay = document.getElementById("overlay");
   overlay.style.display = "block";
   setTimeout(() => { overlay.style.display = 'none'; }, 3000);
+}
+function addToMovementsTable(movement) {
+  let table = $("#movements tbody");
+  let val = movement.id + " -> " + data.cols[movement.pos.final.col - 1] + movement.pos.final.row + ": " + movement.date + " " + movement.time ;
+  let row = 
+  `<tr>
+  <td>${movement.side === "white" ? val : ""}</td>
+  <td>${movement.side === "black" ? val : ""}</td>
+  </tr>`;
+  table.append(row);
 }
