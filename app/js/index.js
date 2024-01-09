@@ -89,6 +89,8 @@ function drop(ev) {
   if (!validateMovement(movement)) return;
   if (movement.captured?.catch) target.removeChild(child);
   history.push(movement);
+  addToMovementsTable(movement);
+  member.setAttribute("state", "moved");
   member.setAttribute("col", target.getAttribute("col"));
   member.setAttribute("row", target.getAttribute("row"));
   target.appendChild(member);
@@ -168,8 +170,8 @@ function validateMovement(movement) {
         return false;
       return validateTrayectory(movement);
     case "horse":
-      return (Math.abs(movement.pos.diffs.cols) === 1 && Math.abs(movement.pos.diffs.rows) === 2)
-        || (Math.abs(movement.pos.diffs.cols) === 2 && Math.abs(movement.pos.diffs.rows) === 1);
+      return ((Math.abs(movement.pos.diffs.cols) === 1 && Math.abs(movement.pos.diffs.rows) === 2)
+        || (Math.abs(movement.pos.diffs.cols) === 2 && Math.abs(movement.pos.diffs.rows) === 1));
     case "pawn":
       let factor = 0;
       switch (movement.side) {
@@ -187,7 +189,6 @@ function validateMovement(movement) {
     default:
       return false;
   }
-  addToMovementsTable(movement);
   return true;
 }
 function changeTurn() {
@@ -203,11 +204,12 @@ function messageShow(msg) {
 }
 function addToMovementsTable(movement) {
   let table = $("#movements tbody");
-  let val = movement.id + " -> " + data.cols[movement.pos.final.col - 1] + movement.pos.final.row + ": " + movement.date + " " + movement.time ;
-  let row = 
-  `<tr>
+  let val = movement.id + " -> " + movement.pos.final.row + data.cols[movement.pos.final.col - 1];
+  let row =
+    `<tr>
   <td>${movement.side === "white" ? val : ""}</td>
   <td>${movement.side === "black" ? val : ""}</td>
+  <td>${movement.time}</td>
   </tr>`;
   table.append(row);
 }
