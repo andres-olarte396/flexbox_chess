@@ -8,7 +8,7 @@ Usando Javascript y CSS pinta un tablero de ajedrez y posiciona sus piezas que s
 
 Este proyecto es un juego de ajedrez interactivo que puedes jugar en tu navegador web. Está implementado en JavaScript y utiliza jQuery para manipular el DOM.
 
-![image](https://github.com/andres-olarte396/flexbox_chess/assets/20707860/32c7ea96-fbfb-4ac7-bbde-9108ab276b27)
+![Captura de pantalla](https://github.com/AndresOlarteZabala/flexbox_chess/assets/78939028/e2e0782e-4cf6-4503-96f8-9229770f487a)
 
 ## Estructura del Proyecto
 
