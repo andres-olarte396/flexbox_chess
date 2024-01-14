@@ -27,6 +27,17 @@
   text-align: center;
 }
 
+.flex {
+  width: max-content;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex>div {
+  margin: 30px;
+  text-align: center;
+}
+
 .cell {
   width: 6rem;
   height: 6rem;
@@ -107,7 +118,6 @@ td, th {
   text-align: center;
   padding: 8px;
   color: darkgray;
-  background-color: lightgray;
   height: 14px;
   font-family: Impact, Haettenschweiler, Franklin Gothic Bold, Charcoal, Helvetica Inserat, Bitstream Vera Sans Bold, Arial Black, sans serif !important;
 }

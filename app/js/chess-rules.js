@@ -1,3 +1,5 @@
+
+
 function drop(ev) {
   ev.preventDefault();
   let member = document.getElementById(ev.dataTransfer.getData("id"));
@@ -54,6 +56,7 @@ function drop(ev) {
 
   turnLabel.html(data.side);
   quantityLabel.html(data.turn);
+  startClock(data);
 }
 
 function validateCaptured(member) {
@@ -149,4 +152,41 @@ function validateMovement(movement) {
       return false;
   }
   return true;
+}
+
+let whiteTime = 0;
+let blackTime = 0;
+let intervalId;
+
+function startClock(data) {
+  intervalId = setInterval(() => updateClock(data), 1000);
+}
+
+function updateClock(data) {
+  if (data.side === "white")
+    whiteTime++;
+  if (data.side === "black")
+    blackTime++;
+
+  updateClockDisplay();
+}
+
+function updateClockDisplay() {
+  const whiteClockElement = document.getElementById('white-clock');
+  const blackClockElement = document.getElementById('black-clock');
+
+  whiteClockElement.textContent = formatTime(whiteTime);
+  blackClockElement.textContent = formatTime(blackTime);
+}
+
+function formatTime(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  return `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
+}
+
+function padZero(value) {
+  return value < 10 ? `0${value}` : value;
 }

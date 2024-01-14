@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <title>Chess</title>
-  <link rel="stylesheet" href="css/index.css" />
-  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-
+  <link rel="stylesheet" href="css/index.min.css" />
+  <script src="js/jquery-1.12.0.min.js"></script>
 </head>
-
 <body>
   <div>
     <span>
       <h1>Chess</h1>
-      <h3>Turn: <span id="turn">white</span> - Quantity: <span id="quantity">0</span> - White points: <span
-          id="white_points">0</span> - Black points: <span id="black_points">0</span></h3>
     </span>
   </div>
   <div class="container">
@@ -24,11 +19,30 @@
       </div>
     </div>
     <div>
+      <div id="board" class="flex">
+        <div>
+         <span>Turn:</span> 
+          <span id="quantity">0</span>
+          <hr>
+          <span id="turn">white</span>
+        </div>
+        <hr>
+        <div>
+          <span>White</span>
+          <span id="white-clock">00:00:00</span>
+          <hr>
+          <span id="white_points">0</span>
+        </div>
+        <hr>
+        <div>
+          <span>Black</span>
+          <span id="black-clock">00:00:00</span>
+          <hr>
+          <span id="black_points">0</span>
+        </div>
+      </div>
       <table id="movements">
         <caption>Movements</caption>
-        <colgroup>
-          <col class="counter" span="1">
-        </colgroup>
         <thead>
           <tr>
             <th>#</th>

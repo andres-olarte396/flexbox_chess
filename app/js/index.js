@@ -19,14 +19,14 @@ function load() {
         for (let i = 0; i < data.board.cols; i++) {
           let r = `<div id="${data.cols[i]}" class="col">`;
           for (let j = 0; j < data.board.rows; j++) {
-            r = `${r}<div id="${j + 1}${data.cols[i]}" col="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
+            r = `${r}<div id="${data.cols[i]}${j + 1}" col="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
           }
           r = `${r}</div>`;
           chess.html(`${chess.html()}${r}`);
         }
         data.army_members.forEach(member => {
           for (let i = 0; i < member.initial_quantity; i++) {
-            let cell = $(`#${member.initial_row}${member.initial_col.split(',')[i]}`);
+            let cell = $(`#${member.initial_col.split(',')[i]}${member.initial_row}`);
             let col = cell.attr("col");
             if (cell)
               cell.html(`<icon id="${member.id}" title="${member.name} ${member.id}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
