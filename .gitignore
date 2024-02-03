@@ -7,8 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# mins
-min
+# Archivos minimizados
 *.min.*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

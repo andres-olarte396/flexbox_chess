@@ -1,5 +1,3 @@
-
-
 function drop(ev) {
   ev.preventDefault();
   let member = document.getElementById(ev.dataTransfer.getData("id"));
@@ -57,6 +55,7 @@ function drop(ev) {
   turnLabel.html(data.side);
   quantityLabel.html(data.turn);
   startClock(data);
+  saveGame(data)
 }
 
 function validateCaptured(member) {
@@ -159,7 +158,13 @@ let blackTime = 0;
 let intervalId;
 
 function startClock(data) {
+  if (intervalId)
+    clearInterval(intervalId);
   intervalId = setInterval(() => updateClock(data), 1000);
+}
+
+function stopClock() {
+  clearInterval(intervalId);
 }
 
 function updateClock(data) {
@@ -168,6 +173,8 @@ function updateClock(data) {
   if (data.side === "black")
     blackTime++;
 
+  data.whiteTime = whiteTime;
+  data.blackTime = blackTime;
   updateClockDisplay();
 }
 
@@ -183,7 +190,6 @@ function formatTime(seconds) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
-
   return `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
 }
 
