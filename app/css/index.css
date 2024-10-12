@@ -58,47 +58,23 @@
   background-color: grey;
 }
 
-icon {
+piece {
   align-content: center;
   font-size: 5rem;
 }
 
-icon:before {
+piece:before {
   content: attr(symbol);
 }
 
-icon.white {
+piece.white {
   text-shadow: 3px 3px 10px black;
   color: white;
 }
 
-icon.black {
+piece.black {
   text-shadow: 3px 3px 10px white;
   color: black;
-}
-
-icon.king :before {
-  content: "♔";
-}
-
-icon.qeen :before {
-  content: "♕";
-}
-
-icon.tower :before {
-  content: "♖";
-}
-
-icon.beshop :before {
-  content: "♗";
-}
-
-icon.horse :before {
-  content: "♘";
-}
-
-icon.pawn :before {
-  content: "♙";
 }
 
 h1, h2, h3, h4, h5, span.h1, span.h2, span.h3, span {
@@ -109,6 +85,11 @@ h1, h2, h3, h4, h5, span.h1, span.h2, span.h3, span {
 table {
   border-collapse: collapse;
   width: 100%;
+}
+
+table > tbody {
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 td, th {

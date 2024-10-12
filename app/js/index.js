@@ -33,7 +33,7 @@ function loadGame(response) {
         let cell = $(`#${member.initial_col.split(',')[i]}${member.initial_row}`);
         let col = cell.attr("col");
         if (cell)
-          cell.html(`<icon id="${member.id}" title="${member.name} ${member.id}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
+          cell.html(`<piece id="${member.id}" title="${member.name} ${member.id}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
       }
     });
     saveGame(data);
