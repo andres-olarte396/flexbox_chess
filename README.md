@@ -1,57 +1,106 @@
-# Chess Game
+# ♟️ Chess Game  
 
-Un juego de ajedrez simple implementado en JavaScript.
+Este proyecto es una implementación interactiva de un tablero de ajedrez, diseñado con Flexbox y programado en JavaScript puro, para aprender y mostrar conceptos básicos de diseño y programación.  
 
-## Descripción del Proyecto
+---
 
-Usando Javascript y CSS pinta un tablero de ajedrez y posiciona sus piezas que se pueden mover y aplica algunas reglas
+## 📖 Descripción del Proyecto  
 
-Este proyecto es un juego de ajedrez interactivo que puedes jugar en tu navegador web. Está implementado en JavaScript y utiliza jQuery para manipular el DOM.
+Este proyecto genera un tablero de ajedrez usando **JavaScript**, **CSS**, y **jQuery**, permitiendo a los jugadores mover las piezas de manera interactiva y aplicar reglas básicas del ajedrez.  
 
-![Captura de pantalla](https://github.com/AndresOlarteZabala/flexbox_chess/assets/78939028/e2e0782e-4cf6-4503-96f8-9229770f487a)
+**Características principales:**
 
-## Estructura del Proyecto
+- Generación dinámica del tablero y las piezas.  
+- Movimientos interactivos de piezas mediante arrastrar y soltar.  
+- Registro de tiempo para cada movimiento en formato `hh:mm:ss`.  
 
-/
-|-- css/
-| |-- index.css
-|-- data/
-| |-- initial.json
-|-- js/
-| |-- index.js
-| |-- chess-rules.js
-|-- index.html
-|-- README.md
+![Captura de pantalla](https://github.com/AndresOlarteZabala/flexbox_chess/assets/78939028/e2e0782e-4cf6-4503-96f8-9229770f487a)  
 
-## Configuración del Proyecto
+---
 
-1. Clona el repositorio: `git clone https://github.com/tu-usuario/chess-game.git`
-2. Abre el archivo `index.html` en tu navegador web.
+## 📂 Estructura del Proyecto  
 
-## Dependencias
+```plaintext
+📂 app/
+├── 📂 .attachments
+|   └── 📄 favicon.ico       # Icono de la aplicación
+├── 📂 css/
+|   └── 📄 index.css         # Estilos para el tablero y las piezas
+├── 📂 data/
+|   └── 📄 initial.json      # Datos iniciales para la configuración del tablero
+├── 📂 js/
+|   ├── 📄 index.js          # Lógica principal del juego
+|   └── 📄 chess-rules.js    # Implementación de las reglas del ajedrez
+├── 📄 index.html            # Archivo HTML principal
+└── 📄 README.md             # Documentación del proyecto
+```  
 
-- [jQuery](https://jquery.com/): 1.12.0
+---
 
-## Reglas del Juego
+## 🚀 Configuración del Proyecto  
 
-El juego sigue las reglas estándar del ajedrez, con algunas funciones adicionales implementadas.
+1. Clona este repositorio:
 
-## Interfaz de Usuario
+   ```bash
+   git clone https://github.com/AndresOlarteZabala/flexbox_chess.git
+   ```  
 
-La interfaz de usuario es sencilla. El tablero de ajedrez se muestra en la pantalla, y puedes arrastrar y soltar las piezas para hacer movimientos.
+3. Accede al directorio del proyecto:
 
-## Registro de Tiempo
+   ```bash
+   cd flexbox_chess
+   ```  
 
-El tiempo de cada movimiento se registra en el formato `hh:mm:ss`.
+4. Abre el archivo `index.html` en tu navegador web para empezar a jugar.  
 
-## Contribuciones
+---
 
-Si deseas contribuir a este proyecto, sigue las [pautas de contribución](CONTRIBUTING.md).
+## 📦 Dependencias  
 
-## Historial de Cambios
+Este proyecto utiliza las siguientes dependencias:
 
-Puedes ver el historial de cambios en el [registro de cambios](CHANGELOG.md).
+- [jQuery](https://jquery.com/) versión 1.12.0  
 
-## Licencia
+Asegúrate de incluir la librería en tu proyecto si decides integrarlo en otro entorno.  
+
+---
+
+## 🕹️ Reglas del Juego  
+
+El tablero sigue las reglas estándar del ajedrez:
+
+- Las piezas pueden moverse de acuerdo con sus movimientos tradicionales.  
+- Los movimientos válidos son verificados y restringidos según las reglas básicas.  
+
+---
+
+## 🎨 Interfaz de Usuario  
+
+- La interfaz es sencilla e intuitiva.  
+- Puedes arrastrar y soltar piezas directamente sobre el tablero.  
+
+---
+
+## 🛠️ Contribuciones  
+
+¡Tus contribuciones son bienvenidas! Para colaborar:  
+1. Haz un fork de este repositorio.  
+2. Crea una rama para tus cambios:
+
+   ```bash
+   git checkout -b feature/nueva-funcionalidad
+   ```
+
+4. Envía un pull request con tus modificaciones.  
+
+---
+
+## 📋 Historial de Cambios  
+
+Revisa el historial de cambios en el archivo [CHANGELOG.md](CHANGELOG.md).  
+
+---
+
+## 📜 Licencia  
 
 Este proyecto está bajo la licencia [MIT](LICENSE).
