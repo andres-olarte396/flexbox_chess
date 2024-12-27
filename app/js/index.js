@@ -23,17 +23,23 @@ function loadGame(response) {
     for (let i = 0; i < data.board.cols; i++) {
       let r = `<div id="${data.cols[i]}" class="col">`;
       for (let j = 0; j < data.board.rows; j++) {
-        r = `${r}<div id="${data.cols[i]}${j + 1}" col="${i + 1}" row="${j + 1}" class="cell ${data.board.classes[(i + j) % 2]}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
+        r = `${r}<div id="${data.cols[i]}${j + 1}" col="${i + 1}" row="${j + 1
+          }" class="cell ${data.board.classes[(i + j) % 2]
+          }" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
       }
       r = `${r}</div>`;
       chess.html(`${chess.html()}${r}`);
     }
-    data.army_members.forEach(member => {
+    data.army_members.forEach((member) => {
       for (let i = 0; i < member.initial_quantity; i++) {
-        let cell = $(`#${member.initial_col.split(',')[i]}${member.initial_row}`);
+        let cell = $(
+          `#${member.initial_col.split(",")[i]}${member.initial_row}`
+        );
         let col = cell.attr("col");
         if (cell)
-          cell.html(`<piece id="${member.id}" title="${member.name} ${member.id}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`);
+          cell.html(
+            `<piece id="${member.id}" title="${member.name} ${member.id}" side="${member.side}" name="${member.name}" symbol="${member.symbol}" class="${member.name} ${member.side}" row="${member.initial_row}" col="${col}" points="${member.material_points}" state="initial" draggable="true" ondragstart="drag(event)" />`
+          );
       }
     });
     saveGame(data);
@@ -59,14 +65,19 @@ function messageShow(msg) {
   document.getElementById("message").innerHTML = msg;
   let overlay = document.getElementById("overlay");
   overlay.style.display = "block";
-  setTimeout(() => { overlay.style.display = 'none'; }, 3000);
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 3000);
 }
 
 function addToMovementsTable(movement) {
   let table = $("#movements tbody");
-  let val = movement.id + " -> " + movement.pos.final.row + data.cols[movement.pos.final.col - 1];
-  let row =
-    `<tr>
+  let val =
+    movement.id +
+    " -> " +
+    movement.pos.final.row +
+    data.cols[movement.pos.final.col - 1];
+  let row = `<tr>
   <td>${movement.side === "white" ? val : ""}</td>
   <td>${movement.side === "black" ? val : ""}</td>
   <td>${movement.time}</td>
@@ -75,16 +86,16 @@ function addToMovementsTable(movement) {
 }
 
 function load() {
- /* const savedGame = localStorage.getItem('chess-game');
+  /* const savedGame = localStorage.getItem('chess-game');
   if (savedGame) {
     const parsedGame = JSON.parse(savedGame);
     loadGame(parsedGame);
   } else {*/
-    messageShow("Start");
-    loadNew();
+  messageShow("Start");
+  loadNew();
   //}
 }
 
 function saveGame(gameData) {
-  localStorage.setItem('chess-game', JSON.stringify(gameData));
+  localStorage.setItem("chess-game", JSON.stringify(gameData));
 }
